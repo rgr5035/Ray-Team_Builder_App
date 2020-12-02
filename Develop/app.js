@@ -10,6 +10,48 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+inquirer 
+    .prompt ([
+        {   
+            type: "input",
+            message: "Please enter the Employee name",
+            name: "name",
+        },
+        {
+            type: "input",
+            message: "Please enter the employee ID",
+            name: "id",
+        },
+        {
+            type: "input",
+            message: "Please enter the employee email",
+            name: "email", 
+        },
+        {
+            type: "list",
+            message: "Please choose the employee role",
+            name: "role",
+            choices: ["Manager", "Engineer", "Intern"],
+        },
+        {
+            type: "input",
+            message: "Please enter the manager's office number",
+            name: "officeNumber",
+        },
+        {
+            type: "input",
+            message: "Please enter the engineer's gitHub username",
+            name: "github",
+        },
+        {
+            type: "input",
+            message: "Please enter the intern's school"
+        }
+    ])
+
+fs.writeFile(
+    ""
+)
 
 
 
