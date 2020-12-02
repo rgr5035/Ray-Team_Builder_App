@@ -50,7 +50,7 @@ inquirer
     ])
 
 fs.writeFile(
-    ""
+    "team.html"
 )
 
 
