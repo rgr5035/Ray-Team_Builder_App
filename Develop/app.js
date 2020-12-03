@@ -45,13 +45,49 @@ inquirer
         },
         {
             type: "input",
-            message: "Please enter the intern's school"
+            message: "Please enter the intern's school",
+            name: "school",
+        },
+        {
+            type: "list",
+            message: "Would you like to add another employee?",
+            name: "add",
+            choices: ["Yes", "No",]
         }
     ])
+    .then((data) => {
+        switch (data.role) {
+            case "Manager": {
+                
+            }
+            case "Engineer": {
 
-fs.writeFile(
-    "team.html"
-)
+            }
+            case "Intern": {
+
+            }
+        }
+
+        switch (data.add) {
+            case "Yes": {
+
+            }
+            case "No": {
+                
+            }
+        }
+    
+    fs.writeFile(
+        "team.html"
+
+    )
+    })
+
+
+
+
+
+
 
 
 
