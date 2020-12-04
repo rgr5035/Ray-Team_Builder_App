@@ -10,78 +10,130 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-inquirer 
-    .prompt ([
-        {   
-            type: "input",
-            message: "Please enter the Employee name",
-            name: "name",
-        },
-        {
-            type: "input",
-            message: "Please enter the employee ID",
-            name: "id",
-        },
-        {
-            type: "input",
-            message: "Please enter the employee email",
-            name: "email", 
-        },
-        {
-            type: "list",
-            message: "Please choose the employee role",
-            name: "role",
-            choices: ["Manager", "Engineer", "Intern"],
-        },
-        {
-            type: "input",
-            message: "Please enter the manager's office number",
-            name: "officeNumber",
-        },
-        {
-            type: "input",
-            message: "Please enter the engineer's gitHub username",
-            name: "github",
-        },
-        {
-            type: "input",
-            message: "Please enter the intern's school",
-            name: "school",
-        },
-        {
-            type: "list",
-            message: "Would you like to add another employee?",
-            name: "add",
-            choices: ["Yes", "No",]
-        }
-    ])
-    .then((data) => {
-        switch (data.role) {
-            case "Manager": {
-                
-            }
-            case "Engineer": {
+const employees = [];
 
-            }
-            case "Intern": {
+const initQuestions = () => {
+    inquirer
+        .prompt ([
+            {
+                type: "list",
+                message: "What would you like to do?",
+                name: "todo",
+                choices: ["Create Team", "Add Employee", "Add Manager", "Add Engineer", "Add Intern"] 
+            },
+        ])
+        .then((data) => {
+            switch (data.todo) {
+                    case "Create Team": {
+                        //will need more code, will return a string of the template, write to the file
+                        
+                        render(employees);
+                    }
+                    case "Add Employee": {
+        
+                    }
+                    case "Add Manager": {
+                        managerQuestions();
+                        break;
+                    }
+                    case "Add Engineer": {
+        
+                    }
+                    case "Add Intern": {
+        
+                    }
+                }
+        })
+}
 
-            }
-        }
+const managerQuestions = () => {
+    inquirer
+        .prompt([
+            {   
+                type: "input",
+                message: "Please enter the manager's name",
+                name: "name",
+            },
+            {
+                type: "input",
+                message: "Please enter the manager's ID",
+                name: "id",
+            },
+            {
+                type: "input",
+                message: "Please enter the manager's email",
+                name: "email", 
+            },
+            {
+                type: "input",
+                message: "Please enter the manager's office number",
+                name: "officeNumber",
+            },
+        ])
+        .then ((data) => {
+            const newManager = new Manager (data.name, data.id, data.email, data.officeNumber);
+            employees.push(newManager);
+            initQuestions();
+        })
+}
 
-        switch (data.add) {
-            case "Yes": {
+initQuestions();
 
-            }
-            case "No": {
-                
-            }
-        }
+
+// inquirer 
+//     .prompt ([
+//         {   
+//             type: "input",
+//             message: "Please enter the Employee name",
+//             name: "name",
+//         },
+//         {
+//             type: "input",
+//             message: "Please enter the employee ID",
+//             name: "id",
+//         },
+//         {
+//             type: "input",
+//             message: "Please enter the employee email",
+//             name: "email", 
+//         },
+//         {
+//             type: "list",
+//             message: "Please choose the employee role",
+//             name: "role",
+//             choices: ["Manager", "Engineer", "Intern"],
+//         },
+//         {
+//             type: "input",
+//             message: "Please enter the manager's office number",
+//             name: "officeNumber",
+//         },
+//         {
+//             type: "input",
+//             message: "Please enter the engineer's gitHub username",
+//             name: "github",
+//         },
+//         {
+//             type: "input",
+//             message: "Please enter the intern's school",
+//             name: "school",
+//         },
+//         {
+//             type: "list",
+//             message: "Would you like to add another employee?",
+//             name: "add",
+//             choices: ["Yes", "No",]
+//         }
+//     ])
     
-    fs.writeFile(
-        "team.html"
 
-    )
-    })
+        
+    
+//     fs.writeFile(
+//         "team.html"
+
+//     )
+    
 
 
 
