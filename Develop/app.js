@@ -19,16 +19,12 @@ const initQuestions = () => {
                 type: "list",
                 message: "What would you like to do?",
                 name: "todo",
-                choices: ["Create Team", "Add Employee", "Add Manager", "Add Engineer", "Add Intern"] 
+                choices: ["Add Employee", "Add Manager", "Add Engineer", "Add Intern", "Create Team"] 
             },
         ])
         .then((data) => {
             switch (data.todo) {
-                    case "Create Team": {
-                        //will need more code, will return a string of the template, write to the file
-                        
-                        render(employees);
-                    }
+                    
                     case "Add Employee": {
         
                     }
@@ -37,10 +33,17 @@ const initQuestions = () => {
                         break;
                     }
                     case "Add Engineer": {
-        
+                        engineerQuestions();
+                        break;
                     }
                     case "Add Intern": {
-        
+                        internQuestions();
+                        break;
+                    }
+                    case "Create Team": {
+                        //will need more code, will return a string of the template, write to the file
+                        
+                        render(employees);
                     }
                 }
         })
@@ -67,12 +70,74 @@ const managerQuestions = () => {
             {
                 type: "input",
                 message: "Please enter the manager's office number",
-                name: "officeNumber",
+                name: "github",
             },
         ])
         .then ((data) => {
             const newManager = new Manager (data.name, data.id, data.email, data.officeNumber);
             employees.push(newManager);
+            initQuestions();
+        })
+}
+
+const engineerQuestions = () => {
+    inquirer
+        .prompt([
+            {   
+                type: "input",
+                message: "Please enter the engineer's name",
+                name: "name",
+            },
+            {
+                type: "input",
+                message: "Please enter the engineer's ID",
+                name: "id",
+            },
+            {
+                type: "input",
+                message: "Please enter the engineer's email",
+                name: "email", 
+            },
+            {
+                type: "input",
+                message: "Please enter the engineer's GitHub username",
+                name: "officeNumber",
+            },
+        ])
+        .then ((data) => {
+            const newEngineer = new Engineer (data.name, data.id, data.email, data.github);
+            employees.push(newEngineer);
+            initQuestions();
+        })
+}
+
+const internQuestions = () => {
+    inquirer
+        .prompt([
+            {   
+                type: "input",
+                message: "Please enter the intern's name",
+                name: "name",
+            },
+            {
+                type: "input",
+                message: "Please enter the intern's ID",
+                name: "id",
+            },
+            {
+                type: "input",
+                message: "Please enter the intern's email",
+                name: "email", 
+            },
+            {
+                type: "input",
+                message: "Please enter the intern's school",
+                name: "school",
+            },
+        ])
+        .then ((data) => {
+            const newIntern = new Intern (data.name, data.id, data.email, data.school);
+            employees.push(newIntern);
             initQuestions();
         })
 }
