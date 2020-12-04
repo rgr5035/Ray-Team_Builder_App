@@ -8,8 +8,12 @@ class Intern extends Employee {
         this.school = school;
     }
     
-    getSchool() {}
-    getRole () {}
+    getSchool() {
+        return this.school;
+    }
+    getRole () {
+        return("Intern");
+    }
 }
 
 const newIntern = new Intern ()
