@@ -1,3 +1,4 @@
+//Variable declarations to link other files for use in functions
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -6,13 +7,15 @@ const path = require("path");
 const fs = require("fs");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
-//create conditional to check if output folder exists
+
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+//variable declaration of employees with empty array (where the user's answers will be pushed to)
 const employees = [];
 
+//initial questions for user to begin application functionality
 const initQuestions = () => {
     inquirer
         .prompt ([
@@ -44,6 +47,7 @@ const initQuestions = () => {
         })
 }
 
+//questions generated when user chooses to add a manager
 const managerQuestions = () => {
     inquirer
         .prompt([
@@ -65,7 +69,7 @@ const managerQuestions = () => {
             {
                 type: "input",
                 message: "Please enter the manager's office number",
-                name: "github",
+                name: "officeNumber",
             },
         ])
         .then ((data) => {
@@ -75,6 +79,7 @@ const managerQuestions = () => {
         })
 }
 
+//questions generated when user chooses to add an engineer
 const engineerQuestions = () => {
     inquirer
         .prompt([
@@ -96,7 +101,7 @@ const engineerQuestions = () => {
             {
                 type: "input",
                 message: "Please enter the engineer's GitHub username",
-                name: "officeNumber",
+                name: "github",
             },
         ])
         .then ((data) => {
@@ -106,6 +111,7 @@ const engineerQuestions = () => {
         })
 }
 
+//questions generated when user chooses to add an intern
 const internQuestions = () => {
     inquirer
         .prompt([
@@ -137,6 +143,7 @@ const internQuestions = () => {
         })
 }
 
+//function that checks for team.html file and output directory existence, and overwrites with new information once the user chooses to create team
 const createTeam = () => {
         if (!fs.existsSync(OUTPUT_DIR)) {
           fs.mkdirSync(OUTPUT_DIR);
@@ -144,10 +151,8 @@ const createTeam = () => {
         return fs.writeFileSync(outputPath, render(employees));
 }
 
+//call function to begin the application's question prompts
 initQuestions();
-
-
-
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
