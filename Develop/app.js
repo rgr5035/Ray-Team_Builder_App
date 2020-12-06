@@ -6,6 +6,7 @@ const path = require("path");
 const fs = require("fs");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
+//create conditional to check if output folder exists
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
@@ -19,15 +20,11 @@ const initQuestions = () => {
                 type: "list",
                 message: "What would you like to do?",
                 name: "todo",
-                choices: ["Add Employee", "Add Manager", "Add Engineer", "Add Intern", "Create Team"] 
+                choices: ["Add Manager", "Add Engineer", "Add Intern", "Create Team"] 
             },
         ])
         .then((data) => {
             switch (data.todo) {
-                    
-                    case "Add Employee": {
-        
-                    }
                     case "Add Manager": {
                         managerQuestions();
                         break;
@@ -44,6 +41,7 @@ const initQuestions = () => {
                         //will need more code, will return a string of the template, write to the file
                         
                         render(employees);
+                        //fs writefile needs to be added somewhere
                     }
                 }
         })
@@ -143,67 +141,6 @@ const internQuestions = () => {
 }
 
 initQuestions();
-
-
-// inquirer 
-//     .prompt ([
-//         {   
-//             type: "input",
-//             message: "Please enter the Employee name",
-//             name: "name",
-//         },
-//         {
-//             type: "input",
-//             message: "Please enter the employee ID",
-//             name: "id",
-//         },
-//         {
-//             type: "input",
-//             message: "Please enter the employee email",
-//             name: "email", 
-//         },
-//         {
-//             type: "list",
-//             message: "Please choose the employee role",
-//             name: "role",
-//             choices: ["Manager", "Engineer", "Intern"],
-//         },
-//         {
-//             type: "input",
-//             message: "Please enter the manager's office number",
-//             name: "officeNumber",
-//         },
-//         {
-//             type: "input",
-//             message: "Please enter the engineer's gitHub username",
-//             name: "github",
-//         },
-//         {
-//             type: "input",
-//             message: "Please enter the intern's school",
-//             name: "school",
-//         },
-//         {
-//             type: "list",
-//             message: "Would you like to add another employee?",
-//             name: "add",
-//             choices: ["Yes", "No",]
-//         }
-//     ])
-    
-
-        
-    
-//     fs.writeFile(
-//         "team.html"
-
-//     )
-    
-
-
-
-
-
 
 
 
