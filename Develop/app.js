@@ -38,10 +38,7 @@ const initQuestions = () => {
                         break;
                     }
                     case "Create Team": {
-                        //will need more code, will return a string of the template, write to the file
-                        
-                        render(employees);
-                        //fs writefile needs to be added somewhere
+                        createTeam();
                     }
                 }
         })
@@ -138,6 +135,13 @@ const internQuestions = () => {
             employees.push(newIntern);
             initQuestions();
         })
+}
+
+const createTeam = () => {
+        if (!fs.existsSync(OUTPUT_DIR)) {
+          fs.mkdirSync(OUTPUT_DIR);
+        }
+        return fs.writeFileSync(outputPath, render(employees));
 }
 
 initQuestions();
